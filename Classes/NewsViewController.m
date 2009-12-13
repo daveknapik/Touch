@@ -7,6 +7,7 @@
 //
 
 #import "NewsViewController.h"
+#import "NewsItemViewController.h"
 #import "NewsItem.h"
 #import "TouchXML.h"
 
@@ -55,8 +56,6 @@
 			else if ([nodeName isEqualToString:@"pubDate"]) {
 				newsItem.pubDate = [[resultElement childAtIndex:counter] stringValue];
 			}
-			
-			NSLog(nodeName);
 		}
 		
         // Add the blogItem to the global blogEntries Array so that the view can access it.
@@ -140,7 +139,7 @@
 	}
 	
 	NSUInteger row = [indexPath row];
-	cell.textLabel.text = [[newsItems objectAtIndex:row] title];
+	cell.textLabel.text = [[self.newsItems objectAtIndex:row] title];
 	cell.textLabel.font = [UIFont boldSystemFontOfSize:12];
     return cell;
 }
@@ -152,19 +151,16 @@
     return 40; 
 } 
 
-/*
  - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 	NSUInteger row = [indexPath row];
-	President *prez = [self.list objectAtIndex:row];
+	NewsItem *newsItem = [self.newsItems objectAtIndex:row];
 	
-	PresidentsDetailController *childController = [[PresidentsDetailController alloc] initWithStyle:UITableViewStyleGrouped];
+	NewsItemViewController *newsItemViewController = [[NewsItemViewController alloc] init];
 	
-	childController.title = prez.name;
-	childController.president = prez;
+	newsItemViewController.newsItem = newsItem;
 	
-	[self.navigationController pushViewController:childController animated:YES];
-	[childController release];
+	[self.navigationController pushViewController:newsItemViewController animated:YES];
+	[newsItemViewController release];
 } 
-*/
 
 @end
