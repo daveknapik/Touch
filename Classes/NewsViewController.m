@@ -66,16 +66,18 @@
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
+	
+	UINavigationBar *bar = [self.navigationController navigationBar];
+	[bar setTintColor:[UIColor blackColor]]; 
+	
     if([newsItems count] == 0) {
-        // Create the feed string, in this case I have used dBlog
+        // Create the feed string
         NSString *rssFeedURL = @"http://www.touchmusic.org.uk/index.xml ";
 		
-        // Call the grabRSSFeed function with the above
-        // string as a parameter
+        // Call the grabRSSFeed function with the above string as a parameter
         [self grabRSSFeed:rssFeedURL];
 		
-        // Call the reloadData function on the blogTable, this
-        // will cause it to refresh itself with our new data
+        // Call the reloadData function on the tableView, this will cause it to refresh itself with our new data
         [self.tableView reloadData];
     }
 }
@@ -158,6 +160,7 @@
 	NewsItemViewController *newsItemViewController = [[NewsItemViewController alloc] init];
 	
 	newsItemViewController.newsItem = newsItem;
+	newsItemViewController.title = newsItem.title; 
 	
 	[self.navigationController pushViewController:newsItemViewController animated:YES];
 	[newsItemViewController release];

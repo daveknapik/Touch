@@ -25,7 +25,8 @@
 */
 
 - (void)viewDidLoad {
-	[webView loadHTMLString:newsItem.description baseURL:nil];
+	NSString *html = [NSString stringWithFormat:@"<p><a href='%@'>%@</a></p>%@", newsItem.link, newsItem.title, newsItem.description];
+	[webView loadHTMLString:html baseURL:nil];
     [super viewDidLoad];
 }
 
